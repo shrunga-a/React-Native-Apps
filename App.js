@@ -47,7 +47,7 @@ export default function App() {
       
        <View style={styles.appContainre}>
       
-       <Button title="Add new goal" 
+       <Button title="Add the Goal!!!" 
         color='#a065ec' 
         
         onPress={StartheadGoalHandler}
