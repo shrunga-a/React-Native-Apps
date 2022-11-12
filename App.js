@@ -1,6 +1,7 @@
 import { Button} from "react-native";
 import { StyleSheet,View,FlatList } from "react-native";
 import { useState } from 'react';
+import { useEffect } from "react";
 import GoalItem from "./component/GoalItem";
 import Goalinput from "./component/Goalinput";
 
@@ -11,6 +12,21 @@ export default function App() {
 
   const [ModalIsVisible,setModalIsVisible] = useState(false);
   const [CourseGoal , setCousresGoal] =useState([]);
+  const [currentdate,setCurrentDate]= useState('');
+
+  useEffect(()=>{
+     var date = new Date().getDate(); //Current Date
+     var month = new Date().getMonth() + 1; //Current Month
+     var year = new Date().getFullYear(); //Current Year
+     var hours = new Date().getHours(); //Current Hours
+     var min = new Date().getMinutes(); //Current Minutes
+   setCurrentDate(
+         date + '/' + month + '/' + year + ' ' + hours + ':' + min 
+      );
+},[])
+
+   // var date= new Date;
+
 
   
 
@@ -26,8 +42,8 @@ export default function App() {
   function addGoalHandler(enteredGoalText) {
     setCousresGoal((CurrentCourseGoal) =>
       
-      [...CurrentCourseGoal,
-        {text: enteredGoalText, id: Math.random().toString() },
+      [...CurrentCourseGoal,                                 //,date:d.Date()
+        {text: enteredGoalText, id: Math.random().toString()},
       ]);
       setModalIsVisible(false);
   }
@@ -53,7 +69,7 @@ export default function App() {
         onPress={StartheadGoalHandler}
       />
 
-      {ModalIsVisible && <Goalinput //{ModalIsVisible &&
+      {ModalIsVisible && <Goalinput 
        visiable={ModalIsVisible}  
        onAddgoal={addGoalHandler} 
        onCancel={EndGoalHandler}
@@ -68,6 +84,7 @@ export default function App() {
       
       return (
         <GoalItem 
+         date={currentdate}  
         text={itemData.item.text} 
         id={itemData.item.id}
         onDeleteitem={DeleteGoalhandeler}

@@ -15,6 +15,7 @@ import { useState } from 'react'
     function addGoalHandler(){
         props.onAddgoal(enteredGoalText);
         setEnterdGoalText('');  
+        //var d= new date
     }
 
 
